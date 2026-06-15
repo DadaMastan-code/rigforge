@@ -1,0 +1,50 @@
+{
+  "cpu": {
+    "file": "File:AMD@4nmCCD(6nmIOD)@Zen5@Granite Ridge@Ryzen 5 9600X@100-000001405 BY 2429SUY 9AEQ579S40073 DSC01894.jpg",
+    "author": "FritzchensFritz",
+    "license": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:AMD@4nmCCD(6nmIOD)@Zen5@Granite_Ridge@Ryzen_5_9600X@100-000001405_BY_2429SUY_9AEQ579S40073_DSC01894.jpg"
+  },
+  "gpu": {
+    "file": "File:2023 MSI GeForce RTX 2080 Gaming X Trio (3).jpg",
+    "author": "Jacek Halicki",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:2023_MSI_GeForce_RTX_2080_Gaming_X_Trio_(3).jpg"
+  },
+  "motherboard": {
+    "file": "File:ASUS TUF Gaming motherboards 20190601.jpg",
+    "author": "Solomon203",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:ASUS_TUF_Gaming_motherboards_20190601.jpg"
+  },
+  "memory": {
+    "file": "File:2*8Go DDR4 Corsair - 2018-05-08.jpg",
+    "author": "Bretwa",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:2*8Go_DDR4_Corsair_-_2018-05-08.jpg"
+  },
+  "cooler": {
+    "file": "File:Alpenf\u00f6hn Nordwand \u2013 CPU tower cooler-bottom oblique PNr\u00b00304.jpg",
+    "author": "D-Kuru",
+    "license": "CC BY-SA 3.0 at",
+    "source": "https://commons.wikimedia.org/wiki/File:Alpenf%C3%B6hn_Nordwand_%E2%80%93_CPU_tower_cooler-bottom_oblique_PNr%C2%B00304.jpg"
+  },
+  "storage": {
+    "file": "File:SSD-Samsung-EVO-860-250Gb.jpg",
+    "author": "Grumbler eburg",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:SSD-Samsung-EVO-860-250Gb.jpg"
+  },
+  "psu": {
+    "file": "File:ATX Computer power supply unit.jpg",
+    "author": "Dmitry Makeev",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:ATX_Computer_power_supply_unit.jpg"
+  },
+  "case": {
+    "file": "File:MSI Trident X 9th 20200921 DSC4054 crop.jpg",
+    "author": "PantheraLeo1359531",
+    "license": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:MSI_Trident_X_9th_20200921_DSC4054_crop.jpg"
+  }
+}
