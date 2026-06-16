@@ -3,10 +3,10 @@ import { AnimatedNumber } from '@/components/ui/AnimatedNumber'
 import type { WattageStatus } from '@/engine/wattage'
 
 const STATUS_COLOR: Record<WattageStatus, string> = {
-  ok: '#34d399',
-  warn: '#fbbf24',
-  danger: '#fb5b6b',
-  none: '#22d3ee',
+  ok: '#5d7a4d',
+  warn: '#b1812c',
+  danger: '#a8392a',
+  none: '#be4626',
 }
 
 const STATUS_LABEL: Record<WattageStatus, string> = {
@@ -48,7 +48,7 @@ export function WattageGauge() {
               cy="100"
               r={R}
               fill="none"
-              stroke="rgba(255,255,255,0.07)"
+              stroke="rgba(34,28,20,0.10)"
               strokeWidth="13"
               strokeDasharray={`${ARC} ${C - ARC}`}
               strokeLinecap="round"
@@ -65,7 +65,6 @@ export function WattageGauge() {
               strokeLinecap="round"
               style={{
                 transition: 'stroke-dashoffset 0.7s cubic-bezier(0.16,1,0.3,1), stroke 0.4s',
-                filter: `drop-shadow(0 0 6px ${color}99)`,
               }}
             />
           </g>

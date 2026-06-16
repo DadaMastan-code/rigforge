@@ -1,5 +1,6 @@
 import { Cpu } from 'lucide-react'
 import { IMAGE_CREDITS } from '@/lib/componentImages'
+import { BUILD_CREDITS } from '@/lib/buildCategories'
 
 export function Footer() {
   return (
@@ -25,9 +26,9 @@ export function Footer() {
           </div>
         </div>
 
-        <details className="mt-5 border-t border-white/8 pt-3">
+        <details className="mt-5 border-t border-ink/8 pt-3">
           <summary className="cursor-pointer text-xs text-fg-muted transition-colors hover:text-fg">
-            Component photo credits (Wikimedia Commons)
+            Image credits (Wikimedia Commons)
           </summary>
           <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-fg-dim">
             {IMAGE_CREDITS.map((c) => (
@@ -39,6 +40,20 @@ export function Footer() {
                 className="transition-colors hover:text-fg"
               >
                 <span className="capitalize">{c.category}</span>: {c.author} · {c.license}
+              </a>
+            ))}
+          </div>
+          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-fg-dim">
+            <span className="text-fg-muted">Build photos:</span>
+            {BUILD_CREDITS.map((c) => (
+              <a
+                key={c.name}
+                href={c.url}
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-fg"
+              >
+                {c.name}
               </a>
             ))}
           </div>

@@ -3,6 +3,7 @@ import { Cpu, Code } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 import { useMarketStore } from '@/state/useMarketStore'
 import { useBuildStore } from '@/state/useBuildStore'
+import { CurrencySwitcher } from './CurrencySwitcher'
 
 const scrollTo = (id: string) => () => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -20,12 +21,12 @@ export function Navbar() {
       className="fixed inset-x-0 top-0 z-50"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5">
-        <div className="glass-strong flex w-full items-center justify-between rounded-2xl px-4 py-2.5 shadow-2xl shadow-black/40">
+        <div className="glass-strong flex w-full items-center justify-between rounded-2xl border border-ink/10 px-4 py-2.5 shadow-sm">
           {/* Brand */}
           <button onClick={scrollTo('top')} className="group flex items-center gap-2.5">
-            <span className="relative grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-cyan to-violet">
+            <span className="relative grid h-9 w-9 place-items-center rounded-xl bg-accent">
               <Cpu className="h-5 w-5 text-ink-950" strokeWidth={2.2} />
-              <span className="absolute inset-0 rounded-xl ring-1 ring-white/30" />
+              <span className="absolute inset-0 rounded-xl ring-1 ring-ink/30" />
             </span>
             <span className="font-display text-lg font-semibold tracking-tight">
               Rig<span className="text-gradient">Forge</span>
@@ -35,14 +36,15 @@ export function Navbar() {
           {/* Links */}
           <nav className="hidden items-center gap-1 md:flex">
             {[
+              ['Builds', 'categories'],
               ['Builder', 'builder'],
               ['Performance', 'performance'],
-              ['Marketplace', 'ticker'],
+              ['Reviews', 'reviews'],
             ].map(([label, id]) => (
               <button
                 key={id}
                 onClick={scrollTo(id)}
-                className="rounded-lg px-3 py-1.5 text-sm text-fg-muted transition-colors hover:bg-white/5 hover:text-fg"
+                className="rounded-lg px-3 py-1.5 text-sm text-fg-muted transition-colors hover:bg-ink/5 hover:text-fg"
               >
                 {label}
               </button>
@@ -51,7 +53,7 @@ export function Navbar() {
 
           {/* Right */}
           <div className="flex items-center gap-2.5">
-            <div className="hidden items-center gap-2 rounded-full border border-white/8 bg-ink-900/60 px-3 py-1.5 sm:flex">
+            <div className="hidden items-center gap-2 rounded-full border border-ink/8 bg-ink-900/60 px-3 py-1.5 sm:flex">
               <span className="relative flex h-2 w-2">
                 {running && (
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ok opacity-75" />
@@ -63,11 +65,13 @@ export function Navbar() {
               </span>
             </div>
 
+            <CurrencySwitcher />
+
             <a
               href="https://github.com"
               target="_blank"
               rel="noreferrer"
-              className="hidden h-9 w-9 place-items-center rounded-xl border border-white/8 text-fg-muted transition-colors hover:text-fg sm:grid"
+              className="hidden h-9 w-9 place-items-center rounded-xl border border-ink/8 text-fg-muted transition-colors hover:text-fg sm:grid"
               aria-label="Source"
             >
               <Code className="h-4 w-4" />
@@ -75,7 +79,7 @@ export function Navbar() {
 
             <button
               onClick={scrollTo('builder')}
-              className="relative overflow-hidden rounded-xl bg-gradient-to-r from-cyan to-violet px-4 py-2 text-sm font-semibold text-ink-950 transition-transform hover:scale-[1.03]"
+              className="relative overflow-hidden rounded-xl bg-fg px-4 py-2 text-sm font-semibold text-ink-950 transition-colors hover:bg-accent"
             >
               Start build
               {partCount > 0 && (

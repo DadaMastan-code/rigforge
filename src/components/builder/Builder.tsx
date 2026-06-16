@@ -11,6 +11,7 @@ import { SummaryPanel } from './SummaryPanel'
 import { WattageGauge } from './WattageGauge'
 import { CompatibilityPanel } from './CompatibilityPanel'
 import { PerformancePanel } from './PerformancePanel'
+import { SmartBuild } from './SmartBuild'
 import { cn } from '@/lib/cn'
 
 const RigCanvas = lazy(() =>
@@ -72,7 +73,7 @@ export function Builder() {
             <button
               key={p.id}
               onClick={() => setBuild(buildFromIds(p.ids))}
-              className="group rounded-xl border border-white/10 bg-ink-850/60 px-3 py-2 text-left transition-colors hover:border-cyan/40 hover:bg-white/5"
+              className="group rounded-xl border border-ink/10 bg-ink-850/60 px-3 py-2 text-left transition-colors hover:border-cyan/40 hover:bg-ink/5"
             >
               <div className="text-sm font-semibold text-fg">{p.name}</div>
               <div className="font-mono text-[10px] uppercase tracking-wide text-fg-dim">
@@ -82,6 +83,8 @@ export function Builder() {
           ))}
         </div>
       </div>
+
+      <SmartBuild />
 
       <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
         {/* Rows */}

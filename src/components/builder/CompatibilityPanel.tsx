@@ -16,7 +16,7 @@ export function CompatibilityPanel() {
         : 'All compatible'
 
   const tone =
-    report.errors > 0 ? '#fb5b6b' : report.warnings > 0 ? '#fbbf24' : '#34d399'
+    report.errors > 0 ? '#a8392a' : report.warnings > 0 ? '#b1812c' : '#5d7a4d'
 
   return (
     <div className="glass rounded-2xl p-5">
@@ -39,7 +39,7 @@ export function CompatibilityPanel() {
 
       <div className="mt-3 space-y-2">
         {partCount === 0 && (
-          <div className="flex items-center gap-2 rounded-xl border border-white/8 bg-white/[0.02] px-3 py-3 text-sm text-fg-muted">
+          <div className="flex items-center gap-2 rounded-xl border border-ink/8 bg-ink/[0.02] px-3 py-3 text-sm text-fg-muted">
             <CircleDashed className="h-4 w-4 text-fg-dim" />
             Add parts and RigForge checks every interface in real time.
           </div>
@@ -55,7 +55,7 @@ export function CompatibilityPanel() {
         <AnimatePresence initial={false}>
           {report.issues.map((issue, i) => {
             const isError = issue.level === 'error'
-            const c = isError ? '#fb5b6b' : '#fbbf24'
+            const c = isError ? '#a8392a' : '#b1812c'
             return (
               <motion.div
                 key={`${issue.message}-${i}`}

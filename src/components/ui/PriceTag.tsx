@@ -1,7 +1,8 @@
 import { ArrowDownRight, ArrowUpRight, Minus } from 'lucide-react'
 import { useQuote } from '@/state/useMarketStore'
 import { AnimatedNumber } from './AnimatedNumber'
-import { usd, signedPct } from '@/lib/format'
+import { signedPct } from '@/lib/format'
+import { useCurrency, formatAmount } from '@/state/useCurrencyStore'
 import { cn } from '@/lib/cn'
 
 type Size = 'sm' | 'md' | 'lg' | 'xl'
@@ -30,6 +31,7 @@ export function PriceTag({
   showStock = false,
 }: Props) {
   const quote = useQuote(id)
+  const cur = useCurrency()
   const price = quote?.price ?? basePrice
   const trend = quote?.trend ?? 'flat'
   const changePct = quote?.changePct ?? 0
@@ -53,8 +55,8 @@ export function PriceTag({
           }}
         />
         <AnimatedNumber
-          value={price}
-          format={usd}
+          value={price * cur.rate}
+          format={(n) => formatAmount(n, cur)}
           className={cn('relative font-mono font-semibold tabular-nums text-fg', SIZE[size])}
         />
       </div>

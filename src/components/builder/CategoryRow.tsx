@@ -32,14 +32,14 @@ export function CategoryRow({
       layout
       className={cn(
         'group relative flex items-center gap-4 rounded-2xl border bg-ink-850/50 p-4 transition-colors',
-        hasError ? 'border-danger/40' : part ? 'border-white/10' : 'border-dashed border-white/12',
+        hasError ? 'border-danger/40' : part ? 'border-ink/10' : 'border-dashed border-ink/12',
       )}
     >
       <span className="hidden w-6 shrink-0 text-center font-mono text-sm text-fg-dim sm:block">
         {String(index + 1).padStart(2, '0')}
       </span>
 
-      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-white/10">
+      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-ink/10">
         {part ? (
           <img
             src={CATEGORY_IMAGE[category]}
@@ -94,14 +94,14 @@ export function CategoryRow({
           <div className="flex shrink-0 items-center gap-1.5">
             <button
               onClick={onOpen}
-              className="rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-fg-muted transition-colors hover:bg-white/5 hover:text-fg"
+              className="rounded-lg border border-ink/10 px-3 py-2 text-xs font-medium text-fg-muted transition-colors hover:bg-ink/5 hover:text-fg"
             >
               Change
             </button>
             <button
               onClick={() => removeCategory(category)}
               aria-label={`Remove ${meta.label}`}
-              className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 text-fg-dim transition-colors hover:border-danger/40 hover:text-danger"
+              className="grid h-9 w-9 place-items-center rounded-lg border border-ink/10 text-fg-dim transition-colors hover:border-danger/40 hover:text-danger"
             >
               <X className="h-4 w-4" />
             </button>
@@ -114,7 +114,7 @@ export function CategoryRow({
             <div className="text-sm text-fg-muted">{meta.blurb}</div>
           </div>
           <span
-            className="inline-flex items-center gap-1.5 rounded-lg border border-white/12 px-3 py-2 text-sm font-medium text-fg transition-colors group-hover:bg-white/5"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-ink/12 px-3 py-2 text-sm font-medium text-fg transition-colors group-hover:bg-ink/5"
             style={{ color: accent.hex }}
           >
             <Plus className="h-4 w-4" /> Choose

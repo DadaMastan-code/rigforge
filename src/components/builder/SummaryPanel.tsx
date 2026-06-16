@@ -23,7 +23,7 @@ import {
   type SavedBuild,
 } from '@/engine/share'
 import { AnimatedNumber } from '@/components/ui/AnimatedNumber'
-import { usd } from '@/lib/format'
+import { useCurrency, formatAmount, formatUsdIn } from '@/state/useCurrencyStore'
 import { cn } from '@/lib/cn'
 
 const TOTAL_SLOTS = 8
@@ -35,6 +35,7 @@ export function SummaryPanel() {
   const partCount = useBuildStore((s) => s.partCount)
   const msrpTotal = useBuildStore((s) => s.msrpTotal)
   const liveTotal = useLiveTotal()
+  const cur = useCurrency()
 
   const [copied, setCopied] = useState(false)
   const [saving, setSaving] = useState(false)
@@ -69,8 +70,8 @@ export function SummaryPanel() {
             Live build total
           </div>
           <AnimatedNumber
-            value={liveTotal}
-            format={usd}
+            value={liveTotal * cur.rate}
+            format={(n) => formatAmount(n, cur)}
             className="font-display text-4xl font-bold tabular-nums text-fg"
           />
         </div>
@@ -86,13 +87,13 @@ export function SummaryPanel() {
             ) : (
               <TrendingUp className="h-3.5 w-3.5" />
             )}
-            {usd(Math.abs(savings))}
+            {formatUsdIn(Math.abs(savings), cur)}
           </div>
         )}
       </div>
 
       <div className="mt-1 text-xs text-fg-muted">
-        MSRP <span className="font-mono text-fg-muted line-through">{usd(msrpTotal)}</span> ·{' '}
+        MSRP <span className="font-mono text-fg-muted line-through">{formatUsdIn(msrpTotal, cur)}</span> ·{' '}
         {savings > 0 ? 'below' : savings < 0 ? 'above' : 'at'} list price
       </div>
 
@@ -104,7 +105,7 @@ export function SummaryPanel() {
             {partCount}/{TOTAL_SLOTS}
           </span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-white/6">
+        <div className="h-2 overflow-hidden rounded-full bg-ink/6">
           <motion.div
             className="h-full rounded-full bg-gradient-to-r from-cyan to-violet"
             initial={false}
@@ -127,7 +128,7 @@ export function SummaryPanel() {
         <button
           onClick={() => setSaving((v) => !v)}
           disabled={partCount === 0}
-          className="flex items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/5 px-3 py-2.5 text-sm font-semibold text-fg transition-colors hover:bg-white/10 disabled:opacity-40"
+          className="flex items-center justify-center gap-2 rounded-xl border border-ink/12 bg-ink/5 px-3 py-2.5 text-sm font-semibold text-fg transition-colors hover:bg-ink/10 disabled:opacity-40"
         >
           <Save className="h-4 w-4" /> Save
         </button>
@@ -165,7 +166,7 @@ export function SummaryPanel() {
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && onSave()}
                 placeholder="Name this build…"
-                className="min-w-0 flex-1 rounded-lg border border-white/12 bg-ink-900/60 px-3 py-2 text-sm text-fg outline-none placeholder:text-fg-dim focus:border-cyan/50"
+                className="min-w-0 flex-1 rounded-lg border border-ink/12 bg-ink-900/60 px-3 py-2 text-sm text-fg outline-none placeholder:text-fg-dim focus:border-cyan/50"
               />
               <button
                 onClick={onSave}
@@ -191,14 +192,14 @@ export function SummaryPanel() {
               {saved.map((b) => (
                 <div
                   key={b.id}
-                  className="flex items-center justify-between gap-2 rounded-xl border border-white/8 bg-ink-900/40 px-3 py-2"
+                  className="flex items-center justify-between gap-2 rounded-xl border border-ink/8 bg-ink-900/40 px-3 py-2"
                 >
                   <button
                     onClick={() => setBuild(decodeBuild(b.code))}
                     className="min-w-0 flex-1 text-left"
                   >
                     <div className="truncate text-sm font-medium text-fg">{b.name}</div>
-                    <div className="font-mono text-[11px] text-fg-dim">{usd(b.total)}</div>
+                    <div className="font-mono text-[11px] text-fg-dim">{formatUsdIn(b.total, cur)}</div>
                   </button>
                   <button
                     onClick={() => setSaved(deleteSaved(b.id))}
@@ -217,7 +218,7 @@ export function SummaryPanel() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="mt-3 flex items-center gap-2 rounded-xl border border-white/8 px-3 py-3 text-xs text-fg-muted"
+            className="mt-3 flex items-center gap-2 rounded-xl border border-ink/8 px-3 py-3 text-xs text-fg-muted"
           >
             <X className="h-3.5 w-3.5 text-fg-dim" /> No saved builds yet.
           </motion.p>

@@ -1,10 +1,10 @@
 import { Suspense, lazy } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, ShieldCheck, Activity, Boxes } from 'lucide-react'
-import { EASE } from '@/lib/motion'
+import { ArrowRight } from 'lucide-react'
 import { CATALOG } from '@/data/catalog'
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary'
 import { PriceTag } from '@/components/ui/PriceTag'
+import { EASE } from '@/lib/motion'
 
 const RigCanvas = lazy(() =>
   import('@/components/three/RigCanvas').then((m) => ({ default: m.RigCanvas })),
@@ -13,107 +13,103 @@ const RigCanvas = lazy(() =>
 const scrollTo = (id: string) => () =>
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
-const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
-}
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } } }
 const rise = {
-  hidden: { y: 22, opacity: 0 },
+  hidden: { y: 18, opacity: 0 },
   show: { y: 0, opacity: 1, transition: { duration: 0.7, ease: EASE } },
 }
 
+const STATS = [
+  { v: String(CATALOG.length), l: 'Components in stock' },
+  { v: 'Live', l: 'Prices & availability' },
+  { v: '3D', l: 'Build preview' },
+]
+
 export function Hero() {
   return (
-    <section id="top" className="relative mx-auto max-w-7xl px-5 pt-32 pb-12 md:pt-40">
-      <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_1fr]">
+    <section id="top" className="relative mx-auto max-w-7xl px-5 pt-32 pb-16 md:pt-40">
+      <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
         {/* Copy */}
         <motion.div variants={stagger} initial="hidden" animate="show">
-          <motion.div variants={rise}>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-fg-muted">
-              <span className="h-1.5 w-1.5 animate-pulse-glow rounded-full bg-cyan" />
-              Realtime prices · Live compatibility · 3D preview
-            </span>
+          <motion.div variants={rise} className="flex items-center gap-4">
+            <span className="kicker whitespace-nowrap">Realtime parts marketplace</span>
+            <span className="rule flex-1" />
           </motion.div>
 
           <motion.h1
             variants={rise}
-            className="mt-5 font-display text-5xl font-bold leading-[1.04] tracking-tight md:text-7xl"
+            className="mt-6 font-display text-[2.9rem] font-semibold leading-[1.02] tracking-tight sm:text-6xl md:text-7xl"
           >
-            Forge your
-            <br />
-            <span className="text-gradient">perfect rig.</span>
+            Forge your{' '}
+            <span className="italic font-medium text-accent">perfect</span> rig.
           </motion.h1>
 
-          <motion.p variants={rise} className="mt-5 max-w-xl text-lg text-fg-muted">
-            Pick parts, watch prices move in real time, and let RigForge verify every
-            socket, clearance and watt — visualized in living 3D as you build.
+          <motion.p variants={rise} className="mt-6 max-w-xl text-lg leading-relaxed text-fg-muted">
+            Choose every component and watch prices move in real time while RigForge
+            verifies each socket, clearance and watt — rendered in living 3D as you build.
           </motion.p>
 
-          <motion.div variants={rise} className="mt-8 flex flex-wrap items-center gap-3">
+          <motion.div variants={rise} className="mt-8 flex flex-wrap items-center gap-6">
             <button
               onClick={scrollTo('builder')}
-              className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan to-violet px-5 py-3 font-semibold text-ink-950 transition-transform hover:scale-[1.03]"
+              className="group inline-flex items-center gap-2 rounded-full bg-fg px-6 py-3 text-base font-medium text-ink-950 transition-colors hover:bg-accent"
             >
               Start building
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
             <button
               onClick={scrollTo('ticker')}
-              className="rounded-xl border border-white/12 bg-white/5 px-5 py-3 font-semibold text-fg transition-colors hover:bg-white/10"
+              className="group inline-flex items-center gap-1.5 text-base font-medium text-fg underline-offset-4 hover:underline"
             >
               View live market
+              <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" />
             </button>
           </motion.div>
 
-          <motion.div variants={rise} className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
-            {(
-              [
-                { icon: Boxes, label: `${CATALOG.length} components` },
-                { icon: Activity, label: 'Prices update live' },
-                { icon: ShieldCheck, label: 'Compatibility verified' },
-              ] as const
-            ).map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-2 text-sm text-fg-muted">
-                <Icon className="h-4 w-4 text-cyan" />
-                {label}
-              </div>
-            ))}
+          <motion.div variants={rise} className="mt-12">
+            <span className="rule block" />
+            <div className="mt-5 flex flex-wrap gap-x-12 gap-y-4">
+              {STATS.map((s) => (
+                <div key={s.l}>
+                  <div className="font-display text-2xl font-semibold tabular-nums text-fg">
+                    {s.v}
+                  </div>
+                  <div className="kicker mt-1">{s.l}</div>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
 
         {/* Visual */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
+          initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: EASE, delay: 0.15 }}
+          transition={{ duration: 1, ease: EASE, delay: 0.1 }}
           className="relative h-[360px] sm:h-[460px] lg:h-[540px]"
         >
-          {/* conic glow ring */}
-          <div className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-2xl ring-conic animate-spin-slow" />
+          <div className="absolute inset-4 rounded-2xl border border-ink/10" />
 
           <ErrorBoundary>
             <Suspense
               fallback={
                 <div className="grid h-full place-items-center text-sm text-fg-dim">
-                  Booting visualizer…
+                  Loading preview…
                 </div>
               }
             >
-              <RigCanvas className="h-full w-full" />
+              <RigCanvas demo className="h-full w-full" />
             </Suspense>
           </ErrorBoundary>
 
-          {/* floating live-price chip */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6 }}
-            className="glass-strong absolute bottom-4 left-2 flex items-center gap-3 rounded-2xl px-4 py-3 shadow-xl shadow-black/40 sm:left-6"
+            transition={{ delay: 0.9, duration: 0.6 }}
+            className="absolute bottom-3 left-3 rounded-xl border border-ink/12 bg-ink-850 px-4 py-3 shadow-sm sm:left-6"
           >
-            <div className="text-left">
-              <div className="font-mono text-[10px] uppercase tracking-wider text-fg-dim">
-                RTX 5090 · live
-              </div>
+            <div className="kicker">RTX 5090 · live</div>
+            <div className="mt-1">
               <PriceTag id="gpu-rtx5090" basePrice={1999} size="lg" showStock />
             </div>
           </motion.div>

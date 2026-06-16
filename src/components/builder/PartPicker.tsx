@@ -83,7 +83,7 @@ export function PartPicker({ category, onClose }: { category: Category; onClose:
         transition={{ type: 'spring', stiffness: 280, damping: 32 }}
         className="glass-strong fixed inset-y-0 right-0 z-[61] flex w-full max-w-lg flex-col shadow-2xl shadow-black/60"
       >
-        <header className="flex items-center justify-between border-b border-white/8 px-5 py-4">
+        <header className="flex items-center justify-between border-b border-ink/8 px-5 py-4">
           <div className="flex items-center gap-3">
             <span
               className={cn('grid h-11 w-11 place-items-center rounded-xl', accent.bgSoft)}
@@ -100,13 +100,13 @@ export function PartPicker({ category, onClose }: { category: Category; onClose:
           </div>
           <button
             onClick={onClose}
-            className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 text-fg-muted transition-colors hover:text-fg"
+            className="grid h-9 w-9 place-items-center rounded-lg border border-ink/10 text-fg-muted transition-colors hover:text-fg"
           >
             <X className="h-4 w-4" />
           </button>
         </header>
 
-        <div className="flex items-center gap-1.5 border-b border-white/8 px-5 py-3">
+        <div className="flex items-center gap-1.5 border-b border-ink/8 px-5 py-3">
           <span className="mr-1 text-xs text-fg-dim">Sort</span>
           {SORTS.map((s) => (
             <button
@@ -114,7 +114,7 @@ export function PartPicker({ category, onClose }: { category: Category; onClose:
               onClick={() => setSort(s.id)}
               className={cn(
                 'rounded-lg px-2.5 py-1.5 text-xs font-medium transition-colors',
-                sort === s.id ? 'bg-white/12 text-fg' : 'text-fg-muted hover:bg-white/5',
+                sort === s.id ? 'bg-ink/12 text-fg' : 'text-fg-muted hover:bg-ink/5',
               )}
             >
               {s.label}

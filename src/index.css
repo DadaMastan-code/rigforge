@@ -1,80 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
 
 /* ----------------------------------------------------------------------------
-   RigForge design tokens (Tailwind v4 @theme)
+   RigForge — Editorial light design tokens (Tailwind v4 @theme)
+   Warm paper, ink type, a single terracotta accent. No gradients/glass/glow.
 ---------------------------------------------------------------------------- */
 @theme {
-  /* Ink — the dark surface scale */
-  --color-ink-950: #050609;
-  --color-ink-900: #090b11;
-  --color-ink-850: #0c0e15;
-  --color-ink-800: #11141d;
-  --color-ink-750: #161a25;
-  --color-ink-700: #1c212e;
-  --color-ink-600: #2a3040;
-  --color-ink-500: #3a4254;
+  /* Paper surface scale (light, warm) — names kept from the old scale so
+     existing utilities re-map automatically. 950 = page, 850 = raised card. */
+  --color-ink-950: #f4eee2; /* page background (paper) */
+  --color-ink-900: #efe8da; /* subtle raised / inputs */
+  --color-ink-850: #fcfaf4; /* card surface (warm white) */
+  --color-ink-800: #f1eadc; /* sunken fill */
+  --color-ink-750: #ebe3d2;
+  --color-ink-700: #e2d9c5; /* hover fills */
+  --color-ink-600: #d3c8af;
+  --color-ink-500: #bdb094;
 
-  /* Accents */
-  --color-cyan: #22d3ee;
-  --color-cyan-deep: #0891b2;
-  --color-violet: #a855f7;
-  --color-violet-deep: #7c3aed;
-  --color-forge: #ff7a18;
-  --color-forge-deep: #f43f0e;
+  /* Ink (text + dark elements + hairlines) */
+  --color-ink: #211c14; /* bare: hairlines via /opacity, dark fills */
+  --color-fg: #221d15; /* primary text */
+  --color-fg-muted: #6a6253; /* secondary text */
+  --color-fg-dim: #9b917e; /* captions / faint */
 
-  /* Semantic */
-  --color-ok: #34d399;
-  --color-ok-deep: #059669;
-  --color-warn: #fbbf24;
-  --color-danger: #fb5b6b;
+  /* Single accent — terracotta / burnt sienna ("forge") */
+  --color-accent: #be4626;
+  --color-cyan: #be4626; /* legacy accent names → unified terracotta */
+  --color-violet: #be4626;
+  --color-forge: #be4626;
 
-  /* Text */
-  --color-fg: #eef1f6;
-  --color-fg-muted: #97a1b4;
-  --color-fg-dim: #5b6577;
+  /* Muted, editorial semantics */
+  --color-ok: #5d7a4d; /* olive green */
+  --color-warn: #b1812c; /* ochre */
+  --color-danger: #a8392a; /* brick red */
 
-  /* Fonts */
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  /* Type */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter Tight', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-
-  /* Motion */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ----------------------------------------------------------------------------
    Base
 ---------------------------------------------------------------------------- */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
-
 * {
   box-sizing: border-box;
 }
-
 html,
 body {
   margin: 0;
   padding: 0;
 }
-
 body {
   font-family: var(--font-sans);
   color: var(--color-fg);
   background-color: var(--color-ink-950);
-  background-image:
-    radial-gradient(900px 600px at 12% -8%, rgba(34, 211, 238, 0.12), transparent 60%),
-    radial-gradient(800px 600px at 92% 2%, rgba(168, 85, 247, 0.14), transparent 55%),
-    radial-gradient(700px 700px at 50% 110%, rgba(255, 122, 24, 0.07), transparent 60%);
-  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
-
 #root {
   min-height: 100svh;
 }
@@ -84,8 +72,9 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
   margin: 0;
   color: var(--color-fg);
 }
@@ -98,8 +87,8 @@ h4 {
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
 }
 ::-webkit-scrollbar-track {
   background: var(--color-ink-900);
@@ -112,109 +101,69 @@ h4 {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-ink-500);
 }
-
 ::selection {
-  background: rgba(34, 211, 238, 0.3);
-  color: #fff;
+  background: color-mix(in srgb, var(--color-accent) 26%, transparent);
+  color: var(--color-fg);
 }
 
 /* ----------------------------------------------------------------------------
-   Reusable visual primitives
+   Editorial primitives — these REPLACE the old glass/gradient/glow utilities
+   so components that still reference them degrade to flat, paper-correct styles.
 ---------------------------------------------------------------------------- */
 
-/* Frosted glass card */
+/* "Cards" become flat paper with a hairline rule. */
 .glass {
-  background: linear-gradient(
-    160deg,
-    rgba(255, 255, 255, 0.05),
-    rgba(255, 255, 255, 0.015)
-  );
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  background: var(--color-ink-850);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+  backdrop-filter: none;
 }
-
 .glass-strong {
-  background: linear-gradient(
-    160deg,
-    rgba(22, 26, 37, 0.9),
-    rgba(9, 11, 17, 0.85)
-  );
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  background: var(--color-ink-850);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 14%, transparent);
+  backdrop-filter: none;
 }
 
-/* Gradient text */
+/* Former gradient text → solid accent / ink. */
 .text-gradient {
-  background: linear-gradient(110deg, #67e8f9 0%, #22d3ee 35%, #a855f7 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-accent);
+  -webkit-text-fill-color: currentColor;
 }
-
 .text-gradient-forge {
-  background: linear-gradient(100deg, #ffd08a, #ff7a18 55%, #f43f0e);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-accent);
+  -webkit-text-fill-color: currentColor;
 }
 
-/* Glow helpers */
-.glow-cyan {
-  box-shadow:
-    0 0 0 1px rgba(34, 211, 238, 0.4),
-    0 0 24px -2px rgba(34, 211, 238, 0.5);
-}
+/* Glows removed. */
+.glow-cyan,
 .glow-violet {
-  box-shadow:
-    0 0 0 1px rgba(168, 85, 247, 0.4),
-    0 0 24px -2px rgba(168, 85, 247, 0.5);
+  box-shadow: none;
 }
 
-/* Animated tech grid background layer */
+/* Decorative tech layers neutralized. */
 .grid-bg {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 46px 46px;
-  mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 78%);
-  -webkit-mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 78%);
+  background-image: none;
 }
-
-/* Conic rotating glow ring */
 .ring-conic {
-  background: conic-gradient(
-    from 0deg,
-    transparent 0%,
-    rgba(34, 211, 238, 0.8) 12%,
-    transparent 25%,
-    rgba(168, 85, 247, 0.8) 50%,
-    transparent 62%,
-    rgba(34, 211, 238, 0.6) 80%,
-    transparent 100%
-  );
+  background: transparent;
 }
 
-/* Shimmer / loading sweep */
+/* A real editorial flourish: hairline rule + small caps kicker. */
+.rule {
+  height: 1px;
+  background: color-mix(in srgb, var(--color-ink) 16%, transparent);
+}
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}
+
 .shimmer {
   position: relative;
   overflow: hidden;
 }
-.shimmer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.08),
-    transparent
-  );
-  animation: shimmer 2.4s infinite;
-}
-
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -223,14 +172,8 @@ h4 {
 }
 
 /* ----------------------------------------------------------------------------
-   Keyframes
+   Keyframes (kept minimal)
 ---------------------------------------------------------------------------- */
-@keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
-}
-
 @keyframes spin-slow {
   to {
     transform: rotate(360deg);
@@ -239,40 +182,15 @@ h4 {
 .animate-spin-slow {
   animation: spin-slow 6s linear infinite;
 }
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+.animate-grid {
+  animation: none;
 }
 .animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-  0%,
-  100% {
-    opacity: 0.55;
-  }
-  50% {
-    opacity: 1;
-  }
+  animation: none;
 }
 .animate-pulse-glow {
-  animation: pulse-glow 2.6s ease-in-out infinite;
-}
-
-@keyframes grid-pan {
-  to {
-    background-position: 46px 46px;
-  }
-}
-.animate-grid {
-  animation: grid-pan 8s linear infinite;
+  animation: none;
+  opacity: 1;
 }
 
 @keyframes marquee {
@@ -284,7 +202,7 @@ h4 {
   }
 }
 .animate-marquee {
-  animation: marquee 48s linear infinite;
+  animation: marquee 52s linear infinite;
 }
 .marquee-pause:hover .animate-marquee {
   animation-play-state: paused;
@@ -292,7 +210,7 @@ h4 {
 
 @keyframes flash-up {
   0% {
-    background-color: rgba(52, 211, 153, 0.22);
+    background-color: color-mix(in srgb, var(--color-ok) 24%, transparent);
   }
   100% {
     background-color: transparent;
@@ -300,7 +218,7 @@ h4 {
 }
 @keyframes flash-down {
   0% {
-    background-color: rgba(251, 91, 107, 0.22);
+    background-color: color-mix(in srgb, var(--color-danger) 22%, transparent);
   }
   100% {
     background-color: transparent;

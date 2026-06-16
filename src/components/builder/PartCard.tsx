@@ -28,9 +28,9 @@ export function PartCard({ part, selected, incompatible, onSelect }: Props) {
       whileTap={{ scale: 0.99 }}
       className={cn(
         'group relative w-full overflow-hidden rounded-2xl border bg-ink-850/70 text-left transition-colors',
-        selected ? accent.border : 'border-white/8 hover:border-white/16',
+        selected ? accent.border : 'border-ink/8 hover:border-ink/16',
       )}
-      style={selected ? { boxShadow: `0 0 0 1px ${accent.hex}, 0 0 28px -8px ${accent.hex}` } : undefined}
+      style={selected ? { boxShadow: `0 0 0 1.5px ${accent.hex}` } : undefined}
     >
       {/* Photo banner */}
       <div className="relative h-32 w-full overflow-hidden bg-ink-900">
@@ -47,14 +47,14 @@ export function PartCard({ part, selected, incompatible, onSelect }: Props) {
         />
 
         <span
-          className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-lg bg-ink-950/70 px-2 py-1 text-[10px] font-semibold backdrop-blur"
+          className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-lg border border-ink/10 bg-ink-850/95 px-2 py-1 text-[10px] font-semibold"
           style={{ color: accent.hex }}
         >
           <CategoryIcon category={part.category} className="h-3 w-3" />
           {meta.label}
         </span>
 
-        <span className="absolute right-3 top-3 flex items-center gap-1 rounded-md bg-ink-950/70 px-1.5 py-1 text-[11px] text-fg-muted backdrop-blur">
+        <span className="absolute right-3 top-3 flex items-center gap-1 rounded-md border border-ink/10 bg-ink-850/95 px-1.5 py-1 text-[11px] text-fg-muted">
           <Star className="h-3 w-3 fill-warn text-warn" />
           {part.rating.toFixed(1)}
         </span>
@@ -83,7 +83,7 @@ export function PartCard({ part, selected, incompatible, onSelect }: Props) {
           {chips.map((c) => (
             <span
               key={c.label}
-              className="rounded-md border border-white/6 bg-white/[0.03] px-2 py-1 text-[11px] text-fg-muted"
+              className="rounded-md border border-ink/6 bg-ink/[0.03] px-2 py-1 text-[11px] text-fg-muted"
             >
               <span className="text-fg-dim">{c.label}</span>{' '}
               <span className="font-medium text-fg">{c.value}</span>
@@ -96,7 +96,7 @@ export function PartCard({ part, selected, incompatible, onSelect }: Props) {
           <span
             className={cn(
               'inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold transition-colors',
-              selected ? 'bg-white/10 text-fg' : 'bg-gradient-to-r from-cyan to-violet text-ink-950',
+              selected ? 'bg-ink/10 text-fg' : 'bg-accent text-ink-950',
             )}
           >
             {selected ? <Check className="h-4 w-4" /> : <Plus className="h-4 w-4" />}

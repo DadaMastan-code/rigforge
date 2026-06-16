@@ -37,10 +37,10 @@ export interface AccentTokens {
  * `hex`/`rgb` drive inline glow + gradient styles that can't be class-based.
  */
 export const ACCENT: Record<Accent, AccentTokens> = {
-  cyan: { text: 'text-cyan', bgSoft: 'bg-cyan/10', border: 'border-cyan/40', dot: 'bg-cyan', hex: '#22d3ee', rgb: '34,211,238' },
-  violet: { text: 'text-violet', bgSoft: 'bg-violet/10', border: 'border-violet/40', dot: 'bg-violet', hex: '#a855f7', rgb: '168,85,247' },
-  forge: { text: 'text-forge', bgSoft: 'bg-forge/10', border: 'border-forge/40', dot: 'bg-forge', hex: '#ff7a18', rgb: '255,122,24' },
-  ok: { text: 'text-ok', bgSoft: 'bg-ok/10', border: 'border-ok/40', dot: 'bg-ok', hex: '#34d399', rgb: '52,211,153' },
+  cyan: { text: 'text-cyan', bgSoft: 'bg-cyan/10', border: 'border-cyan/40', dot: 'bg-cyan', hex: '#be4626', rgb: '190,70,38' },
+  violet: { text: 'text-violet', bgSoft: 'bg-violet/10', border: 'border-violet/40', dot: 'bg-violet', hex: '#be4626', rgb: '190,70,38' },
+  forge: { text: 'text-forge', bgSoft: 'bg-forge/10', border: 'border-forge/40', dot: 'bg-forge', hex: '#be4626', rgb: '190,70,38' },
+  ok: { text: 'text-ok', bgSoft: 'bg-ok/10', border: 'border-ok/40', dot: 'bg-ok', hex: '#5d7a4d', rgb: '93,122,77' },
 }
 
 export function CategoryIcon({

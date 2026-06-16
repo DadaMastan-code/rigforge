@@ -4,10 +4,11 @@ import { RigModel } from './RigModel'
 
 interface Props {
   interactive?: boolean
+  demo?: boolean
   className?: string
 }
 
-export function RigCanvas({ interactive = false, className }: Props) {
+export function RigCanvas({ interactive = false, demo = false, className }: Props) {
   return (
     <div className={className}>
       <Canvas
@@ -16,12 +17,13 @@ export function RigCanvas({ interactive = false, className }: Props) {
         dpr={[1, 1.8]}
         style={{ background: 'transparent' }}
       >
-        <ambientLight intensity={0.55} />
-        <directionalLight position={[6, 9, 5]} intensity={1.4} />
-        <pointLight position={[-6, -2, 4]} intensity={55} color="#a855f7" distance={24} />
-        <pointLight position={[6, 4, -3]} intensity={55} color="#22d3ee" distance={24} />
+        {/* Bright, neutral studio lighting for the light/matte scene. */}
+        <ambientLight intensity={1.05} />
+        <directionalLight position={[5, 8, 6]} intensity={2.2} />
+        <directionalLight position={[-6, 2, -4]} intensity={0.6} color="#ffe9d2" />
+        <pointLight position={[4, -3, 5]} intensity={18} color="#ffffff" distance={26} />
 
-        <RigModel spin={!interactive} />
+        <RigModel spin={!interactive} demo={demo} />
 
         {interactive && (
           <OrbitControls
