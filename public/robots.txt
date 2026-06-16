@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dadamastan-code.github.io/rigforge/sitemap.xml
