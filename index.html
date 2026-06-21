@@ -68,7 +68,34 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Static content for search engine crawlers (replaced by React on load) -->
+      <main style="font-family:sans-serif;max-width:900px;margin:0 auto;padding:2rem">
+        <h1>RigForge — Custom PC Builder</h1>
+        <p>RigForge is a free online custom PC builder. Pick every component — CPU, GPU, motherboard, RAM, storage, PSU and case — and get instant compatibility checking, wattage estimates, bottleneck analysis, and a live 3D preview of your build. No login required.</p>
+        <h2>Features</h2>
+        <ul>
+          <li>Custom PC part picker with 60+ components across 8 categories</li>
+          <li>Live compatibility checking — socket, chipset, clearance, power</li>
+          <li>Wattage and PSU calculator</li>
+          <li>FPS and bottleneck performance estimates</li>
+          <li>Interactive 3D build preview</li>
+          <li>Live simulated price feed with stock tracking</li>
+          <li>Budget optimizer — generate a full build from a budget</li>
+          <li>Save and share builds with a URL</li>
+          <li>Multi-currency support (USD, INR, EUR, GBP and more)</li>
+        </ul>
+        <h2>Curated PC Builds</h2>
+        <ul>
+          <li><strong>Gaming PC</strong> — High-refresh 1440p / 4K gaming build with AMD Ryzen 7 9800X3D and NVIDIA GeForce RTX 5070 Ti</li>
+          <li><strong>Video Editing PC</strong> — Timeline-crushing creator rig with Intel Core i9-14900K and RTX 4070 SUPER</li>
+          <li><strong>Workstation / AI PC</strong> — No-compromise compute with Ryzen 9 9950X and GeForce RTX 5090</li>
+          <li><strong>Office / Everyday PC</strong> — Silent, efficient build with AMD Ryzen 5 7600 and integrated graphics</li>
+        </ul>
+        <h2>How to Build a Custom PC with RigForge</h2>
+        <p>Click "Start build", then choose your processor, motherboard, memory, graphics card, cooler, storage, power supply and case. RigForge checks compatibility at every step and updates the live 3D model as you pick parts. When done, share your build via a link or use the budget optimizer to auto-generate a build within your price range.</p>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
